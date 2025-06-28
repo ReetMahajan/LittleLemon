@@ -20,14 +20,17 @@ from restaurant.views import home
 from rest_framework.routers import DefaultRouter
 from restaurant.views import BookingViewSet
 from rest_framework.authtoken.views import obtain_auth_token
-
+from restaurant import views
 
 router = DefaultRouter()
 router.register(r'tables', BookingViewSet)
 
+
 urlpatterns = [
     path('', home),
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+    path('api/', include('restaurant.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
     path('restaurant/booking/', include(router.urls)),
